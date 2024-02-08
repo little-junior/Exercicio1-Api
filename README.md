@@ -33,13 +33,28 @@
 **Ferramenta de testes utilizada: [HTTPIE Desktop](https://httpie.io/app)**
 
 1. GET /imovel:
+<br/>
+
+![image](https://github.com/little-junior/ImovelAPI/assets/126090805/c672691d-b379-4bc7-ad8d-52f17b343cdf)
 
 2. GET /imovel/{id}:
+<br/>
+
+![image](https://github.com/little-junior/ImovelAPI/assets/126090805/b7ee122e-0ef0-4139-8e3c-95a2a3cdc15b)
 
 3. POST /imovel + body:
+<br/>
+
+![image](https://github.com/little-junior/ImovelAPI/assets/126090805/04c29ce8-4fce-410c-b79c-2afc1ee67b4e)
 
 4. DELETE /imovel/{id}:
+<br/>
+
+![image](https://github.com/little-junior/ImovelAPI/assets/126090805/da24d46f-bab3-4ac8-8dc4-50856888902e)
 
 5. PUT /imovel/{id} + body:
+<br/>
+
+![image](https://github.com/little-junior/ImovelAPI/assets/126090805/1179151d-8cda-4a13-a5f6-701d0932c515)
 
 
