@@ -18,11 +18,10 @@ namespace ImovelAPI.Domain
         public double Area { get; set; }
         public string Tipo { get; set; }
 
-        public void Update(Imovel imovel)
+        public void Update(double area, string tipo)
         {
-            Id = imovel.Id;
-            Area = imovel.Area;
-            Tipo = imovel.Tipo;
+            Area = area;
+            Tipo = tipo;
         }
     }
 }
