@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ImovelAPI.ControllersSwagger.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("imovel")]
     [ApiController]
 
     public class ImovelController : ControllerBase
