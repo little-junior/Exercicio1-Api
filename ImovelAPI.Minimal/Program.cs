@@ -14,7 +14,17 @@ namespace ImovelAPI.Minimal
 
             var app = builder.Build();
 
-            app.MapGet("/imovel", () => repository.GetAll());
+            app.MapGet("/imovel", () =>
+            {
+                var imoveis = repository.GetAll();
+
+                if (!imoveis.Any())
+                {
+                    return Results.NotFound("No objects were found");
+                }
+
+                return Results.Ok(imoveis);
+            });
 
             app.MapGet("/imovel/{id}", (int id) =>
             {
@@ -28,10 +38,16 @@ namespace ImovelAPI.Minimal
 
             app.MapPost("/imovel", (ImovelDTO imovelAbstracao) =>
             {
+                try {
                 var imovel = new Imovel(imovelAbstracao.Area, imovelAbstracao.Tipo);
 
                 repository.Add(imovel);
-                return new { imovel.Id };
+                    return Results.Created($"/imovel/{imovel.Id}", imovel);
+
+                } catch(Exception ex)
+                {
+                    return Results.BadRequest(ex.Message);
+                }
             });
 
 
