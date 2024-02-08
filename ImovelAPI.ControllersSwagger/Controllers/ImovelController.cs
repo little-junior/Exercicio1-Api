@@ -10,8 +10,8 @@ namespace ImovelAPI.ControllersSwagger.Controllers
 
     public class ImovelController : ControllerBase
     {
-        private readonly IRepository<Imovel> _repository;
-        public ImovelController(IRepository<Imovel> repository)
+        private readonly IRepository<Imovel, ImovelDTO> _repository;
+        public ImovelController(IRepository<Imovel, ImovelDTO> repository)
         {
             _repository = repository;
         }
@@ -66,18 +66,24 @@ namespace ImovelAPI.ControllersSwagger.Controllers
             return BadRequest("Id not found");
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Put([FromRoute] int id, [FromBody] Imovel imovel)
-        //{
-        //    var updated = _repository.Update(id, imovel);
+        [HttpPut("{id}")]
+        public IActionResult Put([FromRoute] int id, [FromBody] ImovelDTO imovelAbstracao)
+        {
+            try
+            {
+                var updated = _repository.Update(id, imovelAbstracao);
 
-        //    if (updated)
-        //    {
-        //        return Ok(imovel.Id);
-        //    }
+                if (updated)
+                {
+                    return Ok(_repository.GetById(id));
+                }
 
-        //    return NotFound();
-
-        //}
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
