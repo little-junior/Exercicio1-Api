@@ -1,5 +1,6 @@
 using ImovelAPI.Domain;
 using ImovelAPI.Domain.Repositories;
+using ImovelAPI.Domain.DTOs;
 
 namespace ImovelAPI.ControllersSwagger
 {
@@ -13,7 +14,7 @@ namespace ImovelAPI.ControllersSwagger
 
             builder.Services.AddControllers();
 
-            builder.Services.AddSingleton<IRepository<Imovel>, ImovelRepository>();
+            builder.Services.AddSingleton<IRepository<Imovel, ImovelDTO>, ImovelRepository>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
