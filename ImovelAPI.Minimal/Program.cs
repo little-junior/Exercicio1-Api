@@ -1,5 +1,7 @@
 using ImovelAPI.Domain.Repositories;
+using ImovelAPI.Domain.DTOs;
 using ImovelAPI.Domain;
+
 namespace ImovelAPI.Minimal
 {
     public class Program
@@ -24,8 +26,10 @@ namespace ImovelAPI.Minimal
                 return Results.Ok(repository.GetById(id));
             });
 
-            app.MapPost("/imovel", (Imovel imovel) =>
+            app.MapPost("/imovel", (ImovelDTO imovelAbstracao) =>
             {
+                var imovel = new Imovel(imovelAbstracao.Area, imovelAbstracao.Tipo);
+
                 repository.Add(imovel);
                 return new { imovel.Id };
             });
