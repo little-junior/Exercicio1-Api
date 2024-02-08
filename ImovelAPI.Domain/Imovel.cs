@@ -1,4 +1,6 @@
-﻿namespace ApiExercicio1.Model.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace ImovelAPI.Domain
 {
     public class Imovel
     {
@@ -16,5 +18,11 @@
         public double Area { get; set; }
         public string Tipo { get; set; }
 
+        public void Update(Imovel imovel)
+        {
+            Id = imovel.Id;
+            Area = imovel.Area;
+            Tipo = imovel.Tipo;
+        }
     }
 }

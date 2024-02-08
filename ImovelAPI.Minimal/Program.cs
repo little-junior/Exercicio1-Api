@@ -1,6 +1,6 @@
-using ApiExercicio1.Model.Repositories;
-using ApiExercicio1.Model.Entities;
-namespace ApiExercicio1.Minimal
+using ImovelAPI.Domain.Repositories;
+using ImovelAPI.Domain;
+namespace ImovelAPI.Minimal
 {
     public class Program
     {

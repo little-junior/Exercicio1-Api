@@ -1,11 +1,11 @@
-﻿using ApiExercicio1.Model.Entities;
+﻿using ImovelAPI.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiExercicio1.Model.Repositories
+namespace ImovelAPI.Domain.Repositories
 {
     public class ImovelRepository : IRepository<Imovel>
     {
@@ -31,5 +31,22 @@ namespace ApiExercicio1.Model.Repositories
         {
             _imoveis.Add(item);
         }
+
+        public bool Delete(int id)
+        {
+            return _imoveis.Remove(GetById(id));
+        }
+
+        //public bool Update(int id, ImovelDTO item)
+        //{
+        //    foreach(var imovel in _imoveis)
+        //    {
+        //        if (imovel.Id == id)
+        //            imovel.Update(item);
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
     }
 }
