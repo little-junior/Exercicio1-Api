@@ -39,9 +39,9 @@ namespace ImovelAPI.Minimal
             app.MapPost("/imovel", (ImovelDTO imovelAbstracao) =>
             {
                 try {
-                var imovel = new Imovel(imovelAbstracao.Area, imovelAbstracao.Tipo);
+                    var imovel = new Imovel(imovelAbstracao.Area, imovelAbstracao.Tipo);
 
-                repository.Add(imovel);
+                    repository.Add(imovel);
                     return Results.Created($"/imovel/{imovel.Id}", imovel);
 
                 } catch(Exception ex)
@@ -50,6 +50,17 @@ namespace ImovelAPI.Minimal
                 }
             });
 
+            app.MapDelete("/imovel/{id}", (int id) =>
+            {
+                var deleted = repository.Delete(id);
+
+                if (deleted)
+                {
+                    return Results.Ok("Deleted");
+                }
+
+                return Results.BadRequest("Id not found");
+            });
 
             app.Run();
         }
