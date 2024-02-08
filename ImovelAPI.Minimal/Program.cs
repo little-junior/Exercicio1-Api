@@ -62,6 +62,25 @@ namespace ImovelAPI.Minimal
                 return Results.BadRequest("Id not found");
             });
 
+            app.MapPut("/imovel/{id}", (int id, ImovelDTO imovelAbstracao) =>
+            {
+                try
+                {
+                    var updated = repository.Update(id, imovelAbstracao);
+
+                    if (updated)
+                    {
+                        return Results.Ok(repository.GetById(id));
+                    }
+
+                    return Results.NotFound();
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest(ex.Message);
+                }
+            });
+
             app.Run();
         }
     }
