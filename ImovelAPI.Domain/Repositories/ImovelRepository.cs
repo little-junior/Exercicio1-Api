@@ -1,4 +1,5 @@
 ﻿using ImovelAPI.Domain;
+using ImovelAPI.Domain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ImovelAPI.Domain.Repositories
 {
-    public class ImovelRepository : IRepository<Imovel>
+    public class ImovelRepository : IRepository<Imovel, ImovelDTO>
     {
         private static List<Imovel> _imoveis = new List<Imovel>()
         {
@@ -37,16 +38,18 @@ namespace ImovelAPI.Domain.Repositories
             return _imoveis.Remove(GetById(id));
         }
 
-        //public bool Update(int id, ImovelDTO item)
-        //{
-        //    foreach(var imovel in _imoveis)
-        //    {
-        //        if (imovel.Id == id)
-        //            imovel.Update(item);
-        //        return true;
-        //    }
+        public bool Update(int id, ImovelDTO item)
+        {
+            foreach (var imovel in _imoveis)
+            {
+                if (imovel.Id == id)
+                {
+                    imovel.Update(item.Area, item.Tipo);
+                    return true;
+                }
+            }
 
-        //    return false;
-        //}
+            return false;
+        }
     }
 }
