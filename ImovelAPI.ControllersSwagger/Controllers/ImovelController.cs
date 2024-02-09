@@ -2,6 +2,7 @@
 using ImovelAPI.Domain.DTOs;
 using ImovelAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using ImovelAPI.ControllersSwagger.Filters;
 
 namespace ImovelAPI.ControllersSwagger.Controllers
 {
@@ -44,6 +45,7 @@ namespace ImovelAPI.ControllersSwagger.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(AuthorizationCustomFilter))]
         public IActionResult Post([FromBody] ImovelDTO imovelAbstracao)
         {
             var imovel = new Imovel(imovelAbstracao.Area, imovelAbstracao.Tipo);
@@ -54,6 +56,7 @@ namespace ImovelAPI.ControllersSwagger.Controllers
         }
 
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(AuthorizationCustomFilter))]
         public IActionResult Delete([FromRoute] int id)
         {
             var deleted = _repository.Delete(id);
@@ -67,6 +70,7 @@ namespace ImovelAPI.ControllersSwagger.Controllers
         }
 
         [HttpPut("{id}")]
+        [TypeFilter(typeof(AuthorizationCustomFilter))]
         public IActionResult Put([FromRoute] int id, [FromBody] ImovelDTO imovelAbstracao)
         {
             try
