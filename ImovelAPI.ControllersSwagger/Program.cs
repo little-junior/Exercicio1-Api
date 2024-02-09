@@ -1,6 +1,9 @@
 using ImovelAPI.Domain;
 using ImovelAPI.Domain.Repositories;
 using ImovelAPI.Domain.DTOs;
+using ImovelAPI.ControllersSwagger.Filters;
+using ImovelAPI.ControllersSwagger.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ImovelAPI.ControllersSwagger
 {
@@ -12,10 +15,18 @@ namespace ImovelAPI.ControllersSwagger
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<ExceptionCustomFilter>();
+                options.Filters.Add<ActionValidationCustomFilter>();
+            });
 
             builder.Services.AddSingleton<IRepository<Imovel, ImovelDTO>, ImovelRepository>();
 
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -34,12 +45,13 @@ namespace ImovelAPI.ControllersSwagger
 
             app.UseAuthorization();
 
+            //app.UseMiddleware<AutorizacaoMiddleware>();
+            //app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.MapControllers();
 
             app.Run();
         }
     }
-
-
 }
+
